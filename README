@@ -1,0 +1,90 @@
+Matlab Program for Biomolecular Electrostatic Calculations (MPBEC) version 1.0
+
+* Minimum requirements: You need Matlab and Java installed on your computer in order to run MPBEC.
+
+* How to run the MPBEC Graphical user interface (GUI)
+
+The source files are located in the "~/MPBEC/program" folder. There are three available batch files (
+"mpbec-win.bat" for Windows, "mpbec-mac.sh" for Mac and "mpbec-lin.sh" for Linux users). 
+
+There are two ways to run the GUI. We recommend the user to use the provided batch
+files. For Windows users, just double click "mpbec-win.bat" to open the GUI automatically
+in Matlab console mode. On the other hand, Mac (Linux) users have to run the batch file
+"mpbec-mac.sh" ("mpbec-lin.sh") from a terminal. For instance, if you are a Linux user and
+your /path/to/the/file is "/home/smith/Documents/MPBEC/mpbec-lin.sh", you have to
+run "source /home/smith/Documents/MPBEC/mpbec-lin.sh". Mac (Linux) users may run
+"find ~ -name mpbec-mac.sh 2> /dev/null" ("find /home -name mpbec-lin.sh 2> /dev/null")
+to get the /path/to/the/file if needed.
+
+Alternatively, the user can run Matlab as usual, change the current directory to "~/MPBEC/
+program/src/Main" using the Matlab search toolbar, and type "Welcome" in the Matlab
+window console. This GUI introduces MPBEC and provides the user the option to run it in 
+the Beginner or Advanced level mode depending on the experience of the user performing biomolecular 
+electrostatics calculations. In the Beginner mode, the user only has to upload the molecular structure 
+file(s), choose, if needed, an energetic calculation option, provide a name for the input file, and run 
+the calculation. MPBEC will automatically assignsed the remaining parameters. In the Advanced mode, the user 
+has full access to the configuration of MPBEC.
+
+For more information, please read the user guide documentation 
+ "userguide.pdf"  located in the directory "~/MPBEC" .
+
+Note: the GUI will not work properly if, for any reason, your current directory is not
+ "~/MPBEC/program/src/Main".
+
+*This package includes the following Matlab scripts:
+ 
+Welcome.m is the graphical user interface (GUI) that introduces the basis of MPBEC and provides users to run it either in Beginner or Advanced level mode.
+GUI.m is the GUI for advanced user mode. It provides users access to the full capabilities of the configuration of MPBEC. It performs the pre-test of the input data, integrates external applications (Jmol, pdb2pqr and propKa),  generates the inputfile (inputfile.inm), runs the MPBEC Matlab function and performs energy calculations among other features.
+GUI_Beginner.m is the GUI for Beginner users. In this mode, the user only has to upload the molecular structure file(s), choose, if needed, an energetic calculation option, provide a name for the input file, and run the calculation. MPBEC will automatically assignsed the remaining parameters. 
+MPBEC.m main Matlab script function having only one argument, the inputfile.inm. It controls all the calculation and remaining scripts.
+BoundaryCondition.m calculates Dirichlet boundary conditions.
+fbc.m uses linear interpolation to calculate the boundary condition on the finest grid from the electrostatic potential solution previously obtained on the coarse grid.
+linearsolver.m solves the discretized linear PB equation depending on the selected solver and  generates the mean electrostatic potential solution inside the box.
+minresmpbec.m is a modification of the Matlab script minres.m which not only solves the sparse linear equation using minimal residual algorithm 
+but also accounts for the computing time involved in the corresponding calculation.
+diagA.m is an auxiliary function used by minresmpbec.m. 
+bicgstabmpbec.m is a modification of the Matlab script bicgstab.m which not only solves the sparse linear equation using biconjugate gradient 
+stabilized algorithm but also accounts for the computing time involved in the corresponding calculation.
+gmresmpbec.m is a modification of the Matlab script minres.m which not only solves the sparse linear equation using generalized minimal residual 
+algorithm but also accounts for the computing time involved in the corresponding calculation.
+BuiltA.m built the matrix "A" and the vector "b" appearing in the discretized linear PB equation.
+addboudcond.m adds the boundary condition (calculated by BoundaryCondition.m on the box faces) to the electrostatic potential solution 
+(provided by linearsolver.m inside the box)
+energy.m calculates the electrostatic potential free energy from the mean electrostatic potential solution.
+chargemap.m calculates the charge density map (SPL0 and SPL2 methods).
+cubicspline.m calculates the dielectric and kappa maps using a smooth (cubic spline) function (SPL2 method). 
+dielmap.m calculates the dielectric coefficient maps by using the Collony molecular surface (MOL method).
+harmonicsmoothing.m the dielectric maps generated by the Collony molecular surface are "smoothed" by a 9-point harmonic averaging to somewhat reduce 
+sensitivity to the grid setup (SMOL method).
+kappamap.m calculates the kappa map by determining the ionic accessible surface. It is set equal to 1 if accessible, otherwise zero.
+data_parse.m reads dx files converting 1D vector into 3D array. 
+dx_export.m generates dx files from 3D arrays.
+parameters.m defines most of the parameters used by all the Matlab scripts and functions.
+read_inm.m extracts information from inputfiles with extension (parsing strict structure) .inm
+writeout.m generates the required output files as well as the corresponding plots and figures using dx_export.m.
+mpbecini.m changes the current user directory to "~MPBEC/program/srcMain/" and run GUI.m in console mode. 
+dispstat.m prints overwritable message to the command line.
+getcell.m It is used by dielmap.m to get the dimension of the cell and the list of the position of the atoms in the cell and the number of atoms. 
+gridinf.m reads grid information from dx files.
+markSpheref_collony.m resets the assigned specific values for the dielectric maps within spheres of radii equal to the solvent molecular 
+radii 'srad' centered at all the accessible surface grid points that contribute from each atom.
+markSpheref_vanderwalls.m assigns specific values for the dielectric and kappa maps for all the grid points within a sphere of radii equal to
+ the inflated vand der Walls radii centered at each atom position.
+Vacc_atomSurfless20.m determines if a test point is within the union of the spheres centered at the atomic centers with radii equal to the sum of 
+their van der Waals radii and probe radius without using cell list. It is used for solutes having less than 20 atoms.
+Vacc_atomSurfplus20.m determines if a test point is within the union of the spheres centered at the atomic centers with radii equal to the sum of their van der waals radii and probe radius using cell list. It is used for solutes having more than 20 atoms.
+Vacc_SurfSphere.m generates a set of points uniformly distributed over a spherical surface of unit radius.
+ivdwAccExclus.m  is used by Vacc_atomSurf.m to check which points  will contribute to the solvent accessible surface. 
+cell_list.m calculates the fractional volume charge density used by energy.m to perform the energy calculations.
+available_RAM_memory.m determines the available free RAM memory of the user's computer.
+monitor_MPBEC_used_memory.m estimates the required RAM memory allocation required to perform the calculations.
+memory_check.m checks the available and required RAM memory allocation to run MPBEC to alert users when the available RAM memory is insufficient to perform the required calculations depending basically on the number of grid points and the size and number of atoms of the biomolecule(s). 
+
+* Contact information
+Prof. Marcelo Marucho
+Department of Physics & Astronomy
+One UTSA Circle
+University of Texas at San Antonio
+San Antonio, TX 78249
+Email: marcelo.marucho@utsa.edu
+

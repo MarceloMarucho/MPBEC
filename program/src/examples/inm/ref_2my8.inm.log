@@ -1,0 +1,82 @@
+WELCOME!!!!!!....
+ 
+This code approximately solves the PB equation
+for the electrostatic potential on a 3D grid.
+ 
+Reading the input file ref_2my8.inm
+ 
+GRID
+ 
+number of points=   99  148  148,    box size (in A)=  48.9165       73.671       52.005
+ 
+PARAMETERS
+ 
+Solvent dielectric coefficient = 2,   Solute dielectric coefficient = 2,  Temperature (K) = 298.15
+ 
+PRELIMINARLY CALCULATIONS
+ 
+Calculating the mdh boundary condition ....
+ 
+Processing boundary condition along x..............
+Done!
+Processing boundary condition along y.........
+Done!
+Processing boundary condition along z.........
+Done!
+ 
+Generating the charge map using SPL2 ....
+ 
+Processing charge data..........
+Done!
+ 
+Generating the dielectric and ionic maps using SPL2 ....
+ 
+molecular solvent radius (A) = 1.4,    Surface density (1/A^2) = 10    and Swin (A) = 0.3
+Ionic Strength = 0.15,        Maximum Ionic Radius (A) = 2.5
+ 
+APPROXIMATE SOLUTION FOR THE ELECTROSTATIC POTENTIAL
+ 
+Constructing the sparse matrix A....
+Done!....
+ 
+Solving the linearized PB equation using the
+Biconjugated gradient method stabilized by LU matrices
+ 
+Performing the LU decomposition....
+Done!....
+ 
+Solving the linear matrix equation..
+Done!
+ 
+ 
+Residual error=  8.5004e-07,     Iteration number=  24.5
+ 
+Calculating the energy...
+ 
+rmin coarse (larger) grid =  -26.1707-29.5695-31.3715
+ 
+rmax coarse (larger) grid =  22.745844.101520.6335
+ 
+Electrostatic energy=  104151.1069
+ 
+END OF THE CALCULATIONS
+ 
+Elapsed time is 46.356426 seconds.
+ 
+writing out the electrostatic potential solution
+the file ref_target_grid__MATLAB_pot.dx was generated
+ 
+Generating surface plots!....Please, close Jmol application to continue with the calculations
+ 
+the Matlab figure file ref_target_grid_MATLAB_pot.fig was generated
+the picture file ref_target_grid_MATLAB_pot.jpg was generated
+ 
+Generating surface plots!....Please, close Matlab Figure application to finish MAPBS
+ 
+Done!....
+ 
+These files were saved in the directory /home/Guest/Documents/Sandra/Matlab-Adaptative-Poisson-Boltzmann-Solver/MAPBS/src/examples/solutions/outputfiles_ref_2my8 as required
+ 
+The information displayed on this screen is saved in the file MATLAB_screen.io
+ 
+Thanks for using MAPBS!!!!....
